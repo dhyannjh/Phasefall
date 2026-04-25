@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cw3td2mghqrng"]
+
+[ext_resource type="Texture2D" uid="uid://bdxktrdckrojd" path="res://Assets/WorldTiles/Clouds.png" id="1_b7efj"]
+
+[node name="cloud1" type="Node2D" unique_id=1640389520]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1433064384]
+texture = ExtResource("1_b7efj")
+region_enabled = true
+region_rect = Rect2(175, 132, 206, 111)

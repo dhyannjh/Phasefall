@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://chfpymmsd772u"]
+
+[ext_resource type="Script" uid="uid://dlog6w20dbesb" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="PackedScene" uid="uid://dxsf5wl6qsedl" path="res://Scenes/damage_hitbox.tscn" id="2_1f0kj"]
+[ext_resource type="Script" uid="uid://di4pqdei5ps6h" path="res://Scripts/enemy_ai.gd" id="3_afpow"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ne65n"]
+size = Vector2(12, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1f0kj"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1f0kj"]
+
+[sub_resource type="Animation" id="Animation_1f0kj"]
+resource_name = "flip_left"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hitboxShape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_afpow"]
+resource_name = "flip_right"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hitboxShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 2.3841858e-07)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_287tu"]
+_data = {
+&"flip_left": SubResource("Animation_1f0kj"),
+&"flip_right": SubResource("Animation_afpow")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpow"]
+bg_color = Color(0.9999868, 0.85483915, 0.83821124, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_287tu"]
+bg_color = Color(0.75164074, 0.012929363, 6.738305e-07, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="enemy" type="CharacterBody2D" unique_id=2114225623]
+script = ExtResource("1_hghv2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320117780]
+scale = Vector2(12, 12)
+texture = SubResource("CanvasTexture_hghv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=660453703]
+shape = SubResource("RectangleShape2D_ne65n")
+
+[node name="DamageHitbox" parent="." unique_id=2031918002 instance=ExtResource("2_1f0kj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox" unique_id=64597967]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_1f0kj")
+
+[node name="hitboxShape" type="Sprite2D" parent="DamageHitbox" unique_id=1347090399]
+modulate = Color(1.0178745, 0, 0, 0.70980394)
+position = Vector2(7, 2.3841858e-07)
+scale = Vector2(14, 10)
+texture = SubResource("CanvasTexture_1f0kj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DamageHitbox" unique_id=1559266569]
+libraries/ = SubResource("AnimationLibrary_287tu")
+
+[node name="AI" type="Node" parent="." unique_id=502456915]
+script = ExtResource("3_afpow")
+
+[node name="RayCasts" type="Node2D" parent="." unique_id=911764556]
+position = Vector2(0, 7)
+
+[node name="WallRayCast" type="RayCast2D" parent="RayCasts" unique_id=574703321]
+position = Vector2(0, -7)
+target_position = Vector2(-16, 0)
+
+[node name="GroundRayCast" type="RayCast2D" parent="RayCasts" unique_id=251474955]
+position = Vector2(0, -2)
+target_position = Vector2(-20, 50)
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=704598746]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -14.0
+offset_right = 16.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0.019607844, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_afpow")
+theme_override_styles/fill = SubResource("StyleBoxFlat_287tu")
+value = 10.0
+show_percentage = false

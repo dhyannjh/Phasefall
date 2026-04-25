@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://chfpymmsd772u"]
+
+[ext_resource type="Script" uid="uid://dlog6w20dbesb" path="res://Scripts/enemy.gd" id="1_hghv2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ne65n"]
+size = Vector2(14, 14)
+
+[node name="enemy" type="CharacterBody2D" unique_id=2114225623]
+script = ExtResource("1_hghv2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320117780]
+position = Vector2(0, -7)
+scale = Vector2(14, 14)
+texture = SubResource("CanvasTexture_hghv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=660453703]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_ne65n")
