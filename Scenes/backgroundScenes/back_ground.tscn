@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://diog375udom12"]
 
-[ext_resource type="PackedScene" uid="uid://bwon7b7bjwmbv" path="res://Scenes/backgroundScenes/Clouds/CLOUDS.tscn" id="1_01qrs"]
+[ext_resource type="PackedScene" uid="uid://bt1pm347cuape" path="res://Scenes/backgroundScenes/Clouds/CLOUDS.tscn" id="1_01qrs"]
 [ext_resource type="PackedScene" uid="uid://cw3td2mghqrng" path="res://Scenes/backgroundScenes/Clouds/cloud_1.tscn" id="2_m16e7"]
 
 [node name="BackGround" type="Node2D" unique_id=1557424442]
@@ -16,16 +16,27 @@ grow_vertical = 2
 color = Color(0.84178, 0.9012917, 1, 1)
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=747563972]
-motion_scale = Vector2(0.1, 0.1)
+motion_scale = Vector2(0.1, 0)
+motion_offset = Vector2(1000, 0)
+motion_mirroring = Vector2(1160, 0)
 
 [node name="clouds" parent="ParallaxBackground/ParallaxLayer2" unique_id=120250920 instance=ExtResource("1_01qrs")]
-position = Vector2(202, 132)
-scale = Vector2(4, 4)
+position = Vector2(0, -31)
 cloud_scenes = Array[PackedScene]([ExtResource("2_m16e7")])
-cloud_count = null
-speed = null
-spawn_width = null
-left_limit = -300.0
-right_limit = -200.0
+speed = 0
+
+[node name="cloud2" parent="ParallaxBackground/ParallaxLayer2/clouds" unique_id=1222231857 instance=ExtResource("2_m16e7")]
+position = Vector2(812, 89)
+scale = Vector2(4, 4)
 
 [node name="cloud1" parent="ParallaxBackground/ParallaxLayer2/clouds" unique_id=1640389520 instance=ExtResource("2_m16e7")]
+position = Vector2(228, 169)
+scale = Vector2(4, 4)
+
+[node name="cloud3" parent="ParallaxBackground/ParallaxLayer2/clouds" unique_id=184555334 instance=ExtResource("2_m16e7")]
+position = Vector2(776, 313)
+scale = Vector2(4, 4)
+
+[node name="cloud4" parent="ParallaxBackground/ParallaxLayer2/clouds" unique_id=548762122 instance=ExtResource("2_m16e7")]
+position = Vector2(168, 445)
+scale = Vector2(4, 4)

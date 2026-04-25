@@ -183,6 +183,7 @@ target = NodePath("../PhaseRunner")
 
 [node name="PhaseRunner" parent="." unique_id=1837151406 instance=ExtResource("1_jjgbg")]
 position = Vector2(-287, -103)
+speed = 400.0
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1572389997]
 tile_set = SubResource("TileSet_jjvhh")
