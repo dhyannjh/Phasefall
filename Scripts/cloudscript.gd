@@ -33,6 +33,6 @@ func _process(delta):
 	for cloud in get_children():
 		cloud.position.x += speed * delta
 		
-		if cloud.position.x > right_limit:
-			cloud.position.x = left_limit
-			cloud.position.y = randf_range(min_spawn_height, max_spawn_height)
+		#if cloud.position.x > right_limit:
+			#cloud.position.x = left_limit
+			#cloud.position.y = randf_range(min_spawn_height, max_spawn_height)

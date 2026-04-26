@@ -5,6 +5,7 @@
 [node name="cloud3" type="Node2D" unique_id=1640389520]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1433064384]
+scale = Vector2(4, 4)
 texture = ExtResource("1_djoyn")
 region_enabled = true
 region_rect = Rect2(3, 98, 172, 62)

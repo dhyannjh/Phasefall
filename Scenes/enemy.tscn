@@ -92,6 +92,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [node name="enemy" type="CharacterBody2D" unique_id=2114225623]
+z_index = 60
 script = ExtResource("1_hghv2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320117780]
