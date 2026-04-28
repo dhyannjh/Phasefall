@@ -18,6 +18,7 @@ extends CharacterBody2D
 
 # --- ATTACK ---
 @export var attack_cooldown := 0.2
+@export var knockback_value := Vector2i(300, -200)
 
 # --- HITBOX ---
 @onready var damage_hitbox: Area2D = $DamageHitbox
@@ -133,7 +134,7 @@ func attack():
 	else:
 		damage_hitbox_dir.play("flip_left")
 		
-	damage_hitbox.knockback = Vector2(200, -100)
+	damage_hitbox.knockback = knockback_value
 	
 	print("Enemy X:", global_position.x)
 	print("Player X:", ai.player.global_position.x)
@@ -185,6 +186,9 @@ func take_damage(damage, knockback = Vector2.ZERO):
 	health -= damage
 	knockback_vel = knockback
 	hp_bar.value = health
+	
+	# --- SCREEN SHAKE ---
+	get_viewport().get_camera_2d().shake(2)
 
 	print("Enemy Health: ", health)
 

@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var cooldown := 0.2
 @export var damage := 10
 @export var knockback_decay := 800.0
+@export var knockback_value := Vector2i(300, -200)
 
 # --- MOVEMENT SETTINGS ---
 @export var speed := 100.0
@@ -151,7 +152,8 @@ func handle_jump(delta):
 		base_velocity.y *= 0.5
 		
 	if is_on_ceiling():
-		base_velocity.y = 10
+		base_velocity.y = 70
+		get_viewport().get_camera_2d().shake(0.7)
 
 
 # =========================
@@ -161,7 +163,6 @@ func handle_attack():
 	if attack_pressed:
 		attack()
 
-
 func attack():
 	if not can_attack:
 		return
@@ -170,7 +171,7 @@ func attack():
 	if dir == 0:
 		dir = -1 if animated_sprite.flip_h else 1
 
-	damage_hitbox.knockback = Vector2(200 , -100)
+	damage_hitbox.knockback = knockback_value
 	damage_hitbox.damage = damage
 
 	if dir > 0:
@@ -233,6 +234,9 @@ func handle_animations(dir):
 func take_damage(damage, knockback = Vector2.ZERO):
 	health -= damage
 	knockback_vel = knockback
+	
+	# --- SCREEN SHAKE ---
+	get_viewport().get_camera_2d().shake(2)
 
 	print("Player Health: ", health)
 	hp_bar.value = health

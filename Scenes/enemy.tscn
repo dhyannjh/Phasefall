@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://chfpymmsd772u"]
 
-[ext_resource type="Script" uid="uid://dlog6w20dbesb" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://dlog6w20dbesb" path="res://Scripts/enemy/enemy.gd" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://dxsf5wl6qsedl" path="res://Scenes/damage_hitbox.tscn" id="2_1f0kj"]
-[ext_resource type="Script" uid="uid://di4pqdei5ps6h" path="res://Scripts/enemy_ai.gd" id="3_afpow"]
+[ext_resource type="Script" uid="uid://di4pqdei5ps6h" path="res://Scripts/enemy/enemy_ai.gd" id="3_afpow"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_hghv2"]
 
@@ -96,6 +96,7 @@ z_index = 60
 script = ExtResource("1_hghv2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1320117780]
+modulate = Color(0.7750845, 0.1421251, 0.13709122, 1)
 scale = Vector2(12, 12)
 texture = SubResource("CanvasTexture_hghv2")
 
