@@ -184,7 +184,7 @@ target = NodePath("../PhaseRunner")
 
 [node name="PhaseRunner" parent="." unique_id=1837151406 instance=ExtResource("1_jjgbg")]
 z_index = 100
-position = Vector2(-287, -103)
+position = Vector2(-319, -98)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1572389997]
 tile_set = SubResource("TileSet_jjvhh")
