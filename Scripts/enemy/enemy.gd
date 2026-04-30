@@ -36,6 +36,8 @@ var player_dir := 0
 @onready var ai: Node = $AI
 @onready var hp_bar: ProgressBar = $HPBar
 
+var burst_scene = preload("res://Scenes/vfx/attack_burst_1.tscn")
+
 # --- STATE ---
 var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
@@ -105,7 +107,7 @@ func move(direction: float, delta):
 func jump():
 	if is_on_floor():
 		base_velocity.y = jump_velocity
-
+		spawn_burst(0.4)
 
 func stop():
 	base_velocity.x = 0
@@ -178,6 +180,19 @@ func update_velocity():
 	velocity = base_velocity + knockback_vel
 	print("enemy Vel: ", velocity)
 
+# =========================
+# SPAWN BURST
+# =========================
+func spawn_burst(trans):
+	var burst = burst_scene.instantiate()
+	
+	# --- Position burst ---
+	burst.global_position = global_position + Vector2(0, 4)
+	burst.z_index = 80
+	burst.scale.x = -sign(move_input) if move_input != 0 else 1
+	burst.modulate.a = trans
+	
+	get_tree().current_scene.add_child(burst)
 
 # =========================
 # DAMAGE

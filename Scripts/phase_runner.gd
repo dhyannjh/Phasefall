@@ -39,6 +39,8 @@ var health = 100
 @onready var hitbox_shape: Sprite2D = $DamageHitbox/hitboxShape
 @onready var hp_bar: ProgressBar = $HPBar
 
+var burst_scene = preload("res://Scenes/vfx/attack_burst_1.tscn")
+
 # --- INPUT CACHE (future AI-ready) ---
 var move_input := 0.0
 var jump_pressed := false
@@ -144,6 +146,7 @@ func handle_jump(delta):
 	# Jump
 	if jump_buffer_timer > 0 and coyote_timer > 0:
 		base_velocity.y = jump_velocity
+		spawn_burst(0.4)
 		jump_buffer_timer = 0
 		coyote_timer = 0
 
@@ -160,12 +163,10 @@ func handle_jump(delta):
 # ATTACK
 # =========================
 func handle_attack():
-	if attack_pressed:
+	if attack_pressed and can_attack:
 		attack()
 
 func attack():
-	if not can_attack:
-		return
 
 	var dir = sign(base_velocity.x)
 	if dir == 0:
@@ -180,7 +181,7 @@ func attack():
 		damage_hitbox_dir.play("facing_left")
 
 	can_attack = false
-	hitbox_shape.visible = true
+	#hitbox_shape.visible = true
 
 	# ATTACK
 	damage_hitbox.activate()
@@ -189,7 +190,7 @@ func attack():
 
 	# COOLDOWN
 	await get_tree().create_timer(cooldown).timeout
-	hitbox_shape.visible = false
+	#hitbox_shape.visible = false
 	can_attack = true
 
 
@@ -225,6 +226,20 @@ func handle_animations(dir):
 		animated_sprite.flip_h = true
 	elif dir > 0:
 		animated_sprite.flip_h = false
+
+# =========================
+# SPAWN BURST
+# =========================
+func spawn_burst(trans):
+	var burst = burst_scene.instantiate()
+	
+	# --- Position burst ---
+	burst.global_position = global_position + Vector2(0, 4)
+	burst.z_index = 80
+	burst.scale.x = -sign(move_input) if move_input != 0 else 1
+	burst.modulate.a = trans
+	
+	get_tree().current_scene.add_child(burst)
 
 
 # =========================

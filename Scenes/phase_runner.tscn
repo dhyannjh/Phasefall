@@ -231,7 +231,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [node name="PhaseRunner" type="CharacterBody2D" unique_id=1837151406]
-z_index = 20
+z_index = 60
 script = ExtResource("1_ivtyo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1389407104]
@@ -245,7 +245,7 @@ visible = false
 shape = SubResource("CircleShape2D_3d6df")
 
 [node name="DamageHitbox" parent="." unique_id=2031918002 instance=ExtResource("3_a1c02")]
-position = Vector2(-4, -6)
+position = Vector2(4, -6)
 
 [node name="hitboxShape" type="Sprite2D" parent="DamageHitbox" unique_id=1755695209]
 visible = false
@@ -254,7 +254,6 @@ scale = Vector2(17.337648, 12.162706)
 texture = SubResource("CanvasTexture_a1c02")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageHitbox" unique_id=2102919040]
-visible = false
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_a1c02")
 

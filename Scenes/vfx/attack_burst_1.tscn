@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://cda8trpw4y5wu"]
+
+[ext_resource type="Script" uid="uid://d30yrtedch3pi" path="res://Scripts/attack_burst.gd" id="1_5ct3x"]
+[ext_resource type="Texture2D" uid="uid://dn42bp8vg0bmw" path="res://Assets/vfx/BurstAnimation1.png" id="1_rvoq6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ct3x"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gan5e"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj4rn"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 32, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkhmn"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 48, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf3h3"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 64, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hivt0"]
+atlas = ExtResource("1_rvoq6")
+region = Rect2(0, 80, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yuci2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ct3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gan5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj4rn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkhmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf3h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hivt0")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"burst",
+"speed": 20.0
+}]
+
+[node name="AttackBurst" type="Node2D" unique_id=50071033]
+z_index = 80
+z_as_relative = false
+script = ExtResource("1_5ct3x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1239318119]
+z_index = 1000
+z_as_relative = false
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_yuci2")
+animation = &"burst"
