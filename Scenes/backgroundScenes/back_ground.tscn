@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0.8889691, 0.91239065, 1)
+color = Color(0.2851348, 0.1637055, 0.27737162, 1)
 
 [node name="PLFarthest" type="ParallaxLayer" parent="ParallaxBackground" unique_id=747563972]
 z_index = 1
@@ -58,7 +58,7 @@ motion_scale = Vector2(0.2, 0)
 motion_mirroring = Vector2(1320, 0)
 
 [node name="clouds" parent="ParallaxBackground/PLMid" unique_id=1738023965 instance=ExtResource("1_01qrs")]
-modulate = Color(1, 1, 1, 0.5882353)
+modulate = Color(1, 1, 1, 0.37254903)
 scale = Vector2(0.3, 1e-05)
 speed = 25
 

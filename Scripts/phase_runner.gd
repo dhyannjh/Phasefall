@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 @export var team = GLOBAL.team.PLAYER
 
-# --- BASIC ATTACK SETTINGS --- 
+# --- BASIC ATTACK SETTINGS ---
 @export var cooldown := 0.2
 @export var damage := 10
 @export var knockback_decay := 800.0
 @export var knockback_value := Vector2i(300, -200)
+@export var animation_offeset_BA := Vector2i(1, -5)
 
 # --- MOVEMENT SETTINGS ---
 @export var speed := 100.0
@@ -26,6 +27,7 @@ extends CharacterBody2D
 var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
 var can_attack := true
+var is_attacking := false
 
 var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
@@ -68,7 +70,7 @@ func _physics_process(delta):
 	handle_movement(delta)
 	apply_gravity(delta)
 	handle_jump(delta)
-	handle_attack()
+	handle_attack(move_input)
 	apply_knockback(delta)
 	update_velocity()
 	handle_animations(move_input)
@@ -162,9 +164,14 @@ func handle_jump(delta):
 # =========================
 # ATTACK
 # =========================
-func handle_attack():
+func handle_attack(dir):
 	if attack_pressed and can_attack:
+		animated_sprite.offset = animation_offeset_BA * Vector2i(dir, 1)
+		animated_sprite.play("basic_attack")
+		is_attacking = true
 		attack()
+		await animated_sprite.animation_finished
+		is_attacking = false
 
 func attack():
 
@@ -192,6 +199,7 @@ func attack():
 	await get_tree().create_timer(cooldown).timeout
 	#hitbox_shape.visible = false
 	can_attack = true
+	is_attacking = false
 
 
 # =========================
@@ -214,6 +222,11 @@ func update_velocity():
 # ANIMATIONS (FIXED)
 # =========================
 func handle_animations(dir):
+	
+	if is_attacking:
+		return
+	
+	animated_sprite.offset = Vector2i.ZERO
 	if not is_on_floor():
 		animated_sprite.play("jump")
 	elif abs(base_velocity.x) > 5:
