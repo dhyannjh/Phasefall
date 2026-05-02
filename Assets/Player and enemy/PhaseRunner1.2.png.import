@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx4cttdeeamwt"
-path="res://.godot/imported/PhaseRunner1.2.png-f8b98654fe06c3bfb3f5619c499e78ea.ctex"
+path="res://.godot/imported/PhaseRunner1.2.png-62ab14afe18fa398ce4ecfeaa77b8309.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player/PhaseRunner1.2.png"
-dest_files=["res://.godot/imported/PhaseRunner1.2.png-f8b98654fe06c3bfb3f5619c499e78ea.ctex"]
+source_file="res://Assets/Player and enemy/PhaseRunner1.2.png"
+dest_files=["res://.godot/imported/PhaseRunner1.2.png-62ab14afe18fa398ce4ecfeaa77b8309.ctex"]
 
 [params]
 

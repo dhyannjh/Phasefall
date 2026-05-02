@@ -167,7 +167,10 @@ func handle_jump(delta):
 func handle_attack(dir):
 	if attack_pressed and can_attack:
 		animated_sprite.offset = animation_offeset_BA * Vector2i(dir, 1)
-		animated_sprite.play("basic_attack")
+		if is_on_floor():
+			animated_sprite.play("basic_attack_grounded")
+		else:
+			animated_sprite.play("basic_attack_arial")
 		is_attacking = true
 		attack()
 		await animated_sprite.animation_finished

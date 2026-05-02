@@ -19,6 +19,7 @@ color = Color(0.2851348, 0.1637055, 0.27737162, 1)
 
 [node name="PLFarthest" type="ParallaxLayer" parent="ParallaxBackground" unique_id=747563972]
 z_index = 1
+position = Vector2(-749, -29)
 motion_scale = Vector2(0.1, 0)
 motion_mirroring = Vector2(1648, 0)
 
@@ -36,7 +37,7 @@ position = Vector2(1052, 169)
 
 [node name="PLFarthest2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=561457527]
 z_index = 1
-position = Vector2(-381, 213)
+position = Vector2(-1130, 184)
 motion_scale = Vector2(0.1, 0)
 motion_mirroring = Vector2(1648, 0)
 
@@ -54,6 +55,7 @@ position = Vector2(1052, 169)
 
 [node name="PLMid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1840582776]
 z_index = 2
+position = Vector2(-749, -29)
 motion_scale = Vector2(0.2, 0)
 motion_mirroring = Vector2(1320, 0)
 
@@ -69,10 +71,3 @@ scale = Vector2(3.3333328, 100000)
 [node name="cloud4" parent="ParallaxBackground/PLMid/clouds" unique_id=319313277 instance=ExtResource("4_tebfe")]
 position = Vector2(1253.3333, 16600000)
 scale = Vector2(3.3333328, 100000)
-
-[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/PLMid" unique_id=323987371]
-offset_left = -12.0
-offset_top = 248.0
-offset_right = 580.0
-offset_bottom = 249.0
-color = Color(0, 0, 0, 1)

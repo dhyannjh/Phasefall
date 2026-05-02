@@ -19,6 +19,7 @@ extends CharacterBody2D
 # --- ATTACK ---
 @export var attack_cooldown := 0.2
 @export var knockback_value := Vector2i(300, -200)
+@export var animation_offeset_BA := Vector2i(1, -5)
 
 # --- HITBOX ---
 @onready var damage_hitbox: Area2D = $DamageHitbox
@@ -35,6 +36,7 @@ var player_dir := 0
 # --- OTHER NODES ---
 @onready var ai: Node = $AI
 @onready var hp_bar: ProgressBar = $HPBar
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var burst_scene = preload("res://Scenes/vfx/attack_burst_1.tscn")
 
@@ -42,6 +44,7 @@ var burst_scene = preload("res://Scenes/vfx/attack_burst_1.tscn")
 var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
 var can_attack = true
+var is_attacking = false
 
 # --- HITBOX SETTINGS ---
 var hitbox_offset := 0
@@ -69,7 +72,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	handle_movement(delta)
-	handle_actions()
+	handle_animations(move_input)
+	handle_actions(move_input)
 	apply_knockback(delta)
 	update_velocity()
 	move_and_slide()
@@ -114,12 +118,43 @@ func stop():
 
 
 # =========================
+# ANIMATIONS
+# =========================
+func handle_animations(dir):
+	
+	if is_attacking:
+		return
+	
+	animated_sprite.offset = Vector2i.ZERO
+	if not is_on_floor():
+		animated_sprite.play("jump")
+	elif abs(base_velocity.x) > 5:
+		animated_sprite.play("run")
+	else:
+		animated_sprite.play("idle")
+
+	# Flip
+	if dir < 0:
+		animated_sprite.flip_h = true
+	elif dir > 0:
+		animated_sprite.flip_h = false
+
+
+# =========================
 # ACTIONS
 # =========================
-func handle_actions():
+func handle_actions(dir):
 	if attack_requested:
+		is_attacking = true
+		animated_sprite.offset = animation_offeset_BA * Vector2i(dir, 1)
+		if is_on_floor():
+			animated_sprite.play("basic_attack_grounded")
+		else:
+			animated_sprite.play("basic_attack_arial")
 		attack()
 		attack_requested = false
+		await animated_sprite.animation_finished
+		is_attacking = false
 
 
 func attack():
@@ -145,7 +180,7 @@ func attack():
 	# WINDUP
 	can_attack = false
 	await get_tree().create_timer(0.1).timeout
-	hitbox_shape.visible = true
+	#hitbox_shape.visible = true
 
 	# ATTACK
 	damage_hitbox.activate()
@@ -154,7 +189,7 @@ func attack():
 
 	# COOLDOWN
 	await get_tree().create_timer(attack_cooldown).timeout
-	hitbox_shape.visible = false
+	#hitbox_shape.visible = false
 	can_attack = true
 
 

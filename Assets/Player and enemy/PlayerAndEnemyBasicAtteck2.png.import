@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5sabkc6peil4"
-path="res://.godot/imported/PlayerAndEnemyBasicAtteck2.png-920d3e429f2537b9c9b005a454f92565.ctex"
+path="res://.godot/imported/PlayerAndEnemyBasicAtteck2.png-b09d5b3ba1f2e0309f961d9bdcd5d181.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/vfx/PlayerAndEnemyBasicAtteck2.png"
-dest_files=["res://.godot/imported/PlayerAndEnemyBasicAtteck2.png-920d3e429f2537b9c9b005a454f92565.ctex"]
+source_file="res://Assets/Player and enemy/PlayerAndEnemyBasicAtteck2.png"
+dest_files=["res://.godot/imported/PlayerAndEnemyBasicAtteck2.png-b09d5b3ba1f2e0309f961d9bdcd5d181.ctex"]
 
 [params]
 
