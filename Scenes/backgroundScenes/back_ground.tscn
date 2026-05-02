@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://5f4cg8v4636w" path="res://Scenes/backgroundScenes/Clouds/cloud_4.tscn" id="4_tebfe"]
 
 [node name="BackGround" type="Node2D" unique_id=1557424442]
+z_index = 100
+z_as_relative = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=74001345]
 
@@ -15,9 +17,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2851348, 0.1637055, 0.27737162, 1)
+color = Color(0.1809816, 0.116110586, 0.29176983, 1)
 
 [node name="PLFarthest" type="ParallaxLayer" parent="ParallaxBackground" unique_id=747563972]
+modulate = Color(1, 1, 1, 0.39215687)
 z_index = 1
 position = Vector2(-749, -29)
 motion_scale = Vector2(0.1, 0)
@@ -36,6 +39,7 @@ position = Vector2(228, 169)
 position = Vector2(1052, 169)
 
 [node name="PLFarthest2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=561457527]
+modulate = Color(1, 1, 1, 0.47058824)
 z_index = 1
 position = Vector2(-1130, 184)
 motion_scale = Vector2(0.1, 0)
@@ -54,6 +58,7 @@ position = Vector2(228, 169)
 position = Vector2(1052, 169)
 
 [node name="PLMid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1840582776]
+modulate = Color(1, 1, 1, 0.627451)
 z_index = 2
 position = Vector2(-749, -29)
 motion_scale = Vector2(0.2, 0)

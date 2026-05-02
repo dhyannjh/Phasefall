@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Phasefall - Prototype version"
-run/main_scene="uid://bc3dusup127rh"
+run/main_scene="uid://bghn48tryo6ym"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
