@@ -322,6 +322,17 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Gradient" id="Gradient_20vy7"]
+offsets = PackedFloat32Array(0, 0.18620689, 0.3448276, 0.86206895, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0830c"]
+gradient = SubResource("Gradient_20vy7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.7)
+metadata/_snap_enabled = true
+
 [node name="enemy" type="CharacterBody2D" unique_id=2114225623]
 z_index = 60
 script = ExtResource("1_hghv2")
@@ -382,3 +393,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_afpow")
 theme_override_styles/fill = SubResource("StyleBoxFlat_287tu")
 value = 10.0
 show_percentage = false
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2093826828]
+color = Color(0.8862745, 0.5411765, 0.59607846, 1)
+energy = 0.73
+texture = SubResource("GradientTexture2D_0830c")
