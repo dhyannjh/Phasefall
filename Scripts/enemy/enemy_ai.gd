@@ -9,6 +9,7 @@ extends Node
 # --- RAYCAST VARS ---
 @onready var ground_ray: RayCast2D
 @onready var wall_ray: RayCast2D 
+@onready var top_ray: Area2D 
 var ground_ray_length := 0.0
 var wall_ray_length := 0.0
 
@@ -157,6 +158,7 @@ func _ready():
 		
 	ground_ray = enemy.get_node_or_null("RayCasts/GroundRayCast")
 	wall_ray = enemy.get_node_or_null("RayCasts/WallRayCast")
+	top_ray = enemy.get_node_or_null("RayCasts/TopCheck")
 	
 	if ground_ray == null:
 		push_error("Ground ray not found!")
@@ -211,3 +213,8 @@ func _physics_process(delta):
 	#print("state: ", current_state)
 	#print("Enemy: ", enemy.global_position)
 	#print("Ray: ", ground_ray.global_position)
+
+
+func _on_top_check_body_entered(body: Node2D) -> void:
+	if body.has_method("take_damage") and body.team == GLOBAL.team.PLAYER:
+		body.take_damage(5, Vector2(200, -400))

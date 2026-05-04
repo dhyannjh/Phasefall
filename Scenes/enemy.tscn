@@ -306,6 +306,10 @@ _data = {
 &"flip_right": SubResource("Animation_afpow")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0830c"]
+radius = 2.0
+height = 10.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afpow"]
 bg_color = Color(0.9999868, 0.85483915, 0.83821124, 1)
 border_width_left = 1
@@ -340,10 +344,9 @@ script = ExtResource("1_hghv2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1954113857]
 position = Vector2(-1, 3)
 sprite_frames = SubResource("SpriteFrames_8uf12")
-animation = &"basic_attack_arial"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=660453703]
-visible = false
 shape = SubResource("CircleShape2D_287tu")
 
 [node name="DamageHitbox" parent="." unique_id=2031918002 instance=ExtResource("2_1f0kj")]
@@ -376,6 +379,13 @@ target_position = Vector2(-16, 0)
 position = Vector2(0, -2)
 target_position = Vector2(-20, 50)
 
+[node name="TopCheck" type="Area2D" parent="RayCasts" unique_id=718794682]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayCasts/TopCheck" unique_id=635489501]
+position = Vector2(0, -15)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_0830c")
+
 [node name="HPBar" type="ProgressBar" parent="." unique_id=704598746]
 anchors_preset = 7
 anchor_left = 0.5
@@ -398,3 +408,5 @@ show_percentage = false
 color = Color(0.8862745, 0.5411765, 0.59607846, 1)
 energy = 0.73
 texture = SubResource("GradientTexture2D_0830c")
+
+[connection signal="body_entered" from="RayCasts/TopCheck" to="AI" method="_on_top_check_body_entered"]

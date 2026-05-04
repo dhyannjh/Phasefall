@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://5f4cg8v4636w" path="res://Scenes/backgroundScenes/Clouds/cloud_4.tscn" id="4_tebfe"]
 
 [node name="BackGround" type="Node2D" unique_id=1557424442]
-z_index = 100
-z_as_relative = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=74001345]
 
@@ -28,7 +26,7 @@ motion_mirroring = Vector2(1648, 0)
 
 [node name="clouds" parent="ParallaxBackground/PLFarthest" unique_id=120250920 instance=ExtResource("1_01qrs")]
 modulate = Color(1, 1, 1, 0.34509805)
-position = Vector2(0, -125)
+position = Vector2(-850, -125)
 cloud_scenes = Array[PackedScene]([ExtResource("2_m16e7")])
 speed = 5
 
@@ -47,7 +45,7 @@ motion_mirroring = Vector2(1648, 0)
 
 [node name="clouds" parent="ParallaxBackground/PLFarthest2" unique_id=901024712 instance=ExtResource("1_01qrs")]
 modulate = Color(1, 1, 1, 0.28627452)
-position = Vector2(-3, -118)
+position = Vector2(-853, -118)
 cloud_scenes = Array[PackedScene]([ExtResource("2_m16e7")])
 speed = 5
 
@@ -60,12 +58,13 @@ position = Vector2(1052, 169)
 [node name="PLMid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1840582776]
 modulate = Color(1, 1, 1, 0.627451)
 z_index = 2
-position = Vector2(-749, -29)
+position = Vector2(-749, 19)
 motion_scale = Vector2(0.2, 0)
 motion_mirroring = Vector2(1320, 0)
 
 [node name="clouds" parent="ParallaxBackground/PLMid" unique_id=1738023965 instance=ExtResource("1_01qrs")]
 modulate = Color(1, 1, 1, 0.2)
+position = Vector2(-849.99994, 0)
 scale = Vector2(0.3, 1e-05)
 speed = 25
 
