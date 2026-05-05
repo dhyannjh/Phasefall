@@ -216,5 +216,5 @@ func _physics_process(delta):
 
 
 func _on_top_check_body_entered(body: Node2D) -> void:
-	if body.has_method("take_damage") and body.team == GLOBAL.team.PLAYER:
+	if body.has_method("take_damage") and body.team == GLOBAL.team.PLAYER and body.velocity.x < 20:
 		body.take_damage(5, Vector2(200, -400))

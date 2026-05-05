@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cx4cttdeeamwt" path="res://Assets/Player and enemy/PhaseRunner1.2.png" id="2_ivtyo"]
 [ext_resource type="Texture2D" uid="uid://b5sabkc6peil4" path="res://Assets/Player and enemy/PlayerAndEnemyBasicAtteck2.png" id="2_wu35f"]
 [ext_resource type="PackedScene" uid="uid://dxsf5wl6qsedl" path="res://Scenes/damage_hitbox.tscn" id="3_a1c02"]
+[ext_resource type="PackedScene" uid="uid://bdom6tsictksj" path="res://Scenes/vfx/ground_particles.tscn" id="5_l5gny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vyurd"]
 atlas = ExtResource("2_wu35f")
@@ -360,3 +361,6 @@ show_percentage = false
 color = Color(0.36862746, 1, 1, 1)
 energy = 0.73
 texture = SubResource("GradientTexture2D_l5gny")
+
+[node name="GroundParticles" parent="." unique_id=901820252 instance=ExtResource("5_l5gny")]
+position = Vector2(0, 6)

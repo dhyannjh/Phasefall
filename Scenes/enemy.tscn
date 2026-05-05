@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dyvnhrtx1iqji" path="res://Assets/Player and enemy/EnemySpriteSheet1.png" id="2_287tu"]
 [ext_resource type="Texture2D" uid="uid://b5sabkc6peil4" path="res://Assets/Player and enemy/PlayerAndEnemyBasicAtteck2.png" id="2_0830c"]
 [ext_resource type="Script" uid="uid://di4pqdei5ps6h" path="res://Scripts/enemy/enemy_ai.gd" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://bdom6tsictksj" path="res://Scenes/vfx/ground_particles.tscn" id="6_ghaa6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
 atlas = ExtResource("2_0830c")
@@ -385,6 +386,7 @@ target_position = Vector2(-20, 50)
 position = Vector2(0, -15)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_0830c")
+debug_color = Color(0.62217575, 0.4925642, 0.5622657, 0.41960785)
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=704598746]
 anchors_preset = 7
@@ -408,5 +410,8 @@ show_percentage = false
 color = Color(0.8862745, 0.5411765, 0.59607846, 1)
 energy = 0.73
 texture = SubResource("GradientTexture2D_0830c")
+
+[node name="GroundParticles" parent="." unique_id=901820252 instance=ExtResource("6_ghaa6")]
+position = Vector2(0, 6)
 
 [connection signal="body_entered" from="RayCasts/TopCheck" to="AI" method="_on_top_check_body_entered"]

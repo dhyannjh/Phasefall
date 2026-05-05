@@ -37,6 +37,8 @@ var player_dir := 0
 @onready var ai: Node = $AI
 @onready var hp_bar: ProgressBar = $HPBar
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var land_particles: GPUParticles2D = $GroundParticles/LandParticles
+@onready var run_particles: GPUParticles2D = $GroundParticles/RunParticles
 
 var burst_scene = preload("res://Scenes/vfx/attack_burst_1.tscn")
 
@@ -45,6 +47,10 @@ var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
 var can_attack = true
 var is_attacking = false
+
+var was_on_floor = false
+var is_now_on_floor = false
+var just_landed = false
 
 # --- HITBOX SETTINGS ---
 var hitbox_offset := 0
@@ -77,6 +83,7 @@ func _physics_process(delta: float) -> void:
 	apply_knockback(delta)
 	update_velocity()
 	move_and_slide()
+	do_on_landed()
 	#print("MOVE INPUT: ", move_input)
 	#print("Players: ", GLOBAL.players.size())
 
@@ -103,15 +110,18 @@ func move(direction: float, delta):
 	if direction != 0:
 		if is_on_floor():
 			base_velocity.x = move_toward(base_velocity.x, direction * speed, acceleration * delta)
+			run_particles.emitting = true
 		else:
 			base_velocity.x = move_toward(base_velocity.x, direction * speed, acceleration * air_control * delta)
+			run_particles.emitting = false
 	else:
 		base_velocity.x = move_toward(base_velocity.x, 0, friction * delta)
+		run_particles.emitting = false
 	
 func jump():
 	if is_on_floor():
 		base_velocity.y = jump_velocity
-		spawn_burst(0.4)
+		#spawn_burst(0.4)
 
 func stop():
 	base_velocity.x = 0
@@ -208,12 +218,12 @@ func apply_gravity(delta):
 
 func apply_knockback(delta):
 	knockback_vel = knockback_vel.move_toward(Vector2.ZERO, knockback_decay * delta)
-	print("Enemy Knockback: ", knockback_vel)
+	#("Enemy Knockback: ", knockback_vel)
 
 
 func update_velocity():
 	velocity = base_velocity + knockback_vel
-	print("enemy Vel: ", velocity)
+	#print("enemy Vel: ", velocity)
 
 # =========================
 # SPAWN BURST
@@ -229,6 +239,22 @@ func spawn_burst(trans):
 	
 	get_tree().current_scene.add_child(burst)
 
+
+# =========================
+# CHECK JUST LANDED
+# =========================
+func do_on_landed():
+	
+	is_now_on_floor = is_on_floor()
+	
+	if not was_on_floor and is_now_on_floor:
+		#print("Enemy Just Landed")
+		land_particles.restart()
+		just_landed = true
+		
+	was_on_floor = is_now_on_floor
+
+
 # =========================
 # DAMAGE
 # =========================
@@ -240,7 +266,7 @@ func take_damage(damage, knockback = Vector2.ZERO):
 	# --- SCREEN SHAKE ---
 	get_viewport().get_camera_2d().shake(2)
 
-	print("Enemy Health: ", health)
+	#print("Enemy Health: ", health)
 
 	if health <= 0:
 		print("Enemy Died")
