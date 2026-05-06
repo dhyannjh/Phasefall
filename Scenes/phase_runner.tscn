@@ -299,8 +299,8 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_wu35f"]
-offsets = PackedFloat32Array(0.096551724, 0.16896552, 0.18620689, 0.22068965, 0.33103448, 0.86206895, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.011111111, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_l5gny"]
 gradient = SubResource("Gradient_wu35f")
@@ -310,13 +310,16 @@ fill_to = Vector2(0, 0.7)
 metadata/_snap_enabled = true
 
 [node name="PhaseRunner" type="CharacterBody2D" unique_id=1837151406]
+light_mask = 0
+visibility_layer = 2
 z_index = 60
 script = ExtResource("1_ivtyo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1389407104]
+light_mask = 2
 position = Vector2(-1, 3)
 sprite_frames = SubResource("SpriteFrames_acx3n")
-animation = &"idle"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1325752876]
 visible = false
@@ -324,7 +327,7 @@ shape = SubResource("CircleShape2D_3d6df")
 
 [node name="DamageHitbox" parent="." unique_id=2031918002 instance=ExtResource("3_a1c02")]
 visible = false
-position = Vector2(4, -6)
+position = Vector2(-4, -6)
 
 [node name="hitboxShape" type="Sprite2D" parent="DamageHitbox" unique_id=1755695209]
 visible = false
@@ -340,6 +343,7 @@ shape = SubResource("CircleShape2D_a1c02")
 libraries/ = SubResource("AnimationLibrary_l5gny")
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1666817492]
+light_mask = 2
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -359,8 +363,10 @@ show_percentage = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=316017513]
 color = Color(0.36862746, 1, 1, 1)
-energy = 0.73
+energy = 3.48
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_l5gny")
+texture_scale = 1.2
 
 [node name="GroundParticles" parent="." unique_id=901820252 instance=ExtResource("5_l5gny")]
 position = Vector2(0, 6)

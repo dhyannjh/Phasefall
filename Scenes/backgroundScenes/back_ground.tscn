@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05303689, 0.033518326, 0.13855857, 1)
+color = Color(0.039737545, 0.057621647, 0.13984303, 0.9372549)
 
 [node name="PLFarthest" type="ParallaxLayer" parent="ParallaxBackground" unique_id=747563972]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -37,6 +37,7 @@ position = Vector2(228, 169)
 position = Vector2(1052, 169)
 
 [node name="PLFarthest2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=561457527]
+visible = false
 modulate = Color(1, 1, 1, 0.47058824)
 z_index = 1
 position = Vector2(-1130, 184)
@@ -56,6 +57,7 @@ position = Vector2(228, 169)
 position = Vector2(1052, 169)
 
 [node name="PLMid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1840582776]
+visible = false
 modulate = Color(1, 1, 1, 0.627451)
 z_index = 2
 position = Vector2(-749, 19)

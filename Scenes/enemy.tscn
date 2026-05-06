@@ -409,6 +409,7 @@ show_percentage = false
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2093826828]
 color = Color(0.8862745, 0.5411765, 0.59607846, 1)
 energy = 0.73
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_0830c")
 
 [node name="GroundParticles" parent="." unique_id=901820252 instance=ExtResource("6_ghaa6")]
