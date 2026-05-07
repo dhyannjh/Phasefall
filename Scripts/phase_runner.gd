@@ -161,6 +161,7 @@ func handle_jump(delta):
 	if jump_buffer_timer > 0 and coyote_timer > 0:
 		base_velocity.y = jump_velocity
 		#spawn_burst(0.4)
+		land_particles.restart()
 		jump_buffer_timer = 0
 		coyote_timer = 0
 

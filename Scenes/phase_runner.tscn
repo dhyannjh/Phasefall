@@ -309,7 +309,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.7)
 metadata/_snap_enabled = true
 
-[node name="PhaseRunner" type="CharacterBody2D" unique_id=1837151406]
+[node name="PhaseRunner" type="CharacterBody2D" unique_id=1837151406 groups=["player"]]
 light_mask = 0
 visibility_layer = 2
 z_index = 60
@@ -319,7 +319,7 @@ script = ExtResource("1_ivtyo")
 light_mask = 2
 position = Vector2(-1, 3)
 sprite_frames = SubResource("SpriteFrames_acx3n")
-animation = &"jump"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1325752876]
 visible = false

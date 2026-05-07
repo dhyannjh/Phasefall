@@ -328,8 +328,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_20vy7"]
-offsets = PackedFloat32Array(0, 0.18620689, 0.3448276, 0.86206895, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0830c"]
 gradient = SubResource("Gradient_20vy7")
@@ -343,6 +342,7 @@ z_index = 60
 script = ExtResource("1_hghv2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1954113857]
+light_mask = 2
 position = Vector2(-1, 3)
 sprite_frames = SubResource("SpriteFrames_8uf12")
 animation = &"idle"
@@ -389,6 +389,7 @@ shape = SubResource("CapsuleShape2D_0830c")
 debug_color = Color(0.62217575, 0.4925642, 0.5622657, 0.41960785)
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=704598746]
+light_mask = 2
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -408,7 +409,7 @@ show_percentage = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2093826828]
 color = Color(0.8862745, 0.5411765, 0.59607846, 1)
-energy = 0.73
+energy = 2.52
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_0830c")
 
