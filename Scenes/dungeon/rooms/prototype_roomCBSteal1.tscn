@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bdy25vry8vdby"]
+
+[ext_resource type="PackedScene" uid="uid://dbqvmfd43dn08" path="res://Scenes/dungeon/room_base.scn" id="1_wqke0"]
+[ext_resource type="PackedScene" uid="uid://chfpymmsd772u" path="res://Scenes/enemy.tscn" id="2_ckm77"]
+
+[node name="prototype_room" unique_id=203593227 instance=ExtResource("1_wqke0")]
+
+[node name="enemy" parent="." index="3" unique_id=2114225623 instance=ExtResource("2_ckm77")]
+position = Vector2(394, 431)
+detection_range = 200

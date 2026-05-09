@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckyjwheect7ag"
-path="res://.godot/imported/RoomTilesV2.png-beed02300b8bfee8bafb437a4039e99a.ctex"
+uid="uid://1fxt7wa678gx"
+path="res://.godot/imported/RoomTileset1v3.png-ea99d2e6e0baab6a54aa3b24b83b3f47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/WorldTiles/RoomTilesV2.png"
-dest_files=["res://.godot/imported/RoomTilesV2.png-beed02300b8bfee8bafb437a4039e99a.ctex"]
+source_file="res://Assets/WorldTiles/RoomTileset1v3.png"
+dest_files=["res://.godot/imported/RoomTileset1v3.png-ea99d2e6e0baab6a54aa3b24b83b3f47.ctex"]
 
 [params]
 

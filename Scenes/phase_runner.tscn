@@ -358,7 +358,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0.019607844, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_a1c02")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wu35f")
-value = 10.0
+value = 100.0
 show_percentage = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=316017513]
@@ -370,3 +370,9 @@ texture_scale = 1.2
 
 [node name="GroundParticles" parent="." unique_id=901820252 instance=ExtResource("5_l5gny")]
 position = Vector2(0, 6)
+
+[node name="RegenCooldown" type="Timer" parent="." unique_id=2068022016]
+process_callback = 0
+wait_time = 5.0
+
+[connection signal="timeout" from="RegenCooldown" to="." method="_on_regen_cooldown_timeout"]

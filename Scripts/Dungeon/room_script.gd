@@ -5,6 +5,10 @@ extends Node2D
 
 var active := false
 
+
+func _ready():
+	deactivate()
+
 func activate():
 
 	if active:
@@ -12,8 +16,9 @@ func activate():
 
 	active = true
 
-	visible = true
+	#visible = true
 	process_mode = Node.PROCESS_MODE_INHERIT
+	set_physics_process(true)
 
 
 func deactivate():
@@ -23,5 +28,6 @@ func deactivate():
 
 	active = false
 
-	visible = false
+	#visible = false
 	process_mode = Node.PROCESS_MODE_DISABLED
+	set_physics_process(false)

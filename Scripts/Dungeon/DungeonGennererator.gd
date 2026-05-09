@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var grid_size: Vector2i = Vector2i(4, 4)
-@export var room_spacing: Vector2 = Vector2(512, 256)
+@export var room_spacing: Vector2 = Vector2(512, 512)
 
 # --- ROOMS ---
 @export var medium_rooms: Array[PackedScene]
@@ -13,6 +13,10 @@ extends Node2D
 
 var grid = []
 var player_pos = Vector2i(0, 0)
+var last_room := Vector2i(-999, -999)
+
+var used_rooms := []
+@export var allow_duplicates := false
 
 # =========================
 # ON START
@@ -25,10 +29,15 @@ func _ready() -> void:
 # =========================
 # LOOP
 # =========================
-func _process(delta):
+func _physics_process(delta):
 
 	if player:
-		update_active_rooms(player.global_position)
+		
+		var current_room = get_player_grid_pos(player.global_position)
+		
+		if current_room != last_room:
+			last_room = current_room
+			update_active_rooms(player.global_position)
 
 
 # =========================
@@ -56,15 +65,45 @@ func generate_grid():
 	print_grid_debug()
 
 func get_random_room(difficulty: int) -> PackedScene:
-	
+
+	var room_pool: Array[PackedScene]
+
+	# Select difficulty pool
 	if difficulty < 2:
-		return easy_rooms.pick_random()
-		
+		room_pool = easy_rooms
+
 	elif difficulty < 5:
-		return medium_rooms.pick_random()
-		
+		room_pool = medium_rooms
+
 	else:
-		return hard_rooms.pick_random()
+		room_pool = hard_rooms
+
+	# Filter duplicates
+	var possible_rooms: Array[PackedScene] = []
+
+	for room in room_pool:
+		if allow_duplicates or room not in used_rooms:
+			possible_rooms.append(room)
+
+	# Fallback if exhausted
+	if possible_rooms.is_empty():
+
+		print("No unique rooms left in pool.")
+
+		if allow_duplicates:
+			possible_rooms = room_pool
+		else:
+			used_rooms.clear()
+			possible_rooms = room_pool
+
+	# Pick room
+	var selected = possible_rooms.pick_random()
+
+	# Save used room
+	if not allow_duplicates:
+		used_rooms.append(selected)
+
+	return selected
 
 
 # =========================
@@ -135,10 +174,13 @@ func update_active_rooms(player_world_pos: Vector2):
 
 	for row in grid:
 		for room in row:
+			
+			var dx = abs(room.grid_position.x - current_room.x)
+			var dy = abs(room.grid_position.y - current_room.y)
+			
+			var active = dx <= 1 and dy <= 1
 
-			var distance = room.grid_position.distance_to(current_room)
-
-			if distance <= 2:
+			if active:
 				room.room_instance.activate()
 			else:
 				room.room_instance.deactivate()

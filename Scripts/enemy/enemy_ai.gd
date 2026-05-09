@@ -78,7 +78,7 @@ func do_chase():
 
 	# Prevent falling
 	if not ground_ray.is_colliding():
-		enemy.move_input = dir * 0.2
+		enemy.move_input = dir * 0
 		return
 
 	# Jump over walls (NOT player)

@@ -3,6 +3,7 @@
 extends CharacterBody2D
 
 @export var team = GLOBAL.team.ENEMY
+@export var detection_range := 500
 @export var health = 100
 
 # --- PHYSICS ---
@@ -63,7 +64,7 @@ func _ready() -> void:
 	damage_hitbox.team = team
 	
 	# --- AI SETTINGS ---
-	ai.detection_range = 1000
+	ai.detection_range = detection_range
 	ai.attack_range = 21
 	
 	# --- HP BAR SETTINGS ---

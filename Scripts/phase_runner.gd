@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-@export var team = GLOBAL.team.PLAYER
+@export var team := GLOBAL.team.PLAYER
+@export var regen_rate := 10
 
 # --- BASIC ATTACK SETTINGS ---
 @export var cooldown := 0.2
@@ -26,8 +27,11 @@ extends CharacterBody2D
 # --- STATE ---
 var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
+
 var can_attack := true
 var is_attacking := false
+
+var can_regen := true
 
 var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
@@ -44,6 +48,7 @@ var just_landed = false
 @onready var damage_hitbox_dir: AnimationPlayer = $DamageHitbox/AnimationPlayer
 @onready var hitbox_shape: Sprite2D = $DamageHitbox/hitboxShape
 @onready var hp_bar: ProgressBar = $HPBar
+@onready var regen_cooldown: Timer = $RegenCooldown
 
 @onready var land_particles: GPUParticles2D = $GroundParticles/LandParticles
 @onready var run_particles: GPUParticles2D = $GroundParticles/RunParticles
@@ -80,6 +85,7 @@ func _physics_process(delta):
 	handle_attack(move_input)
 	apply_knockback(delta)
 	update_velocity()
+	handle_health_and_regen(delta)
 	handle_animations(move_input)
 	move_and_slide()
 	do_on_landed()
@@ -87,6 +93,8 @@ func _physics_process(delta):
 	#TEMP -------------------------------
 	if Input.is_action_just_pressed("ui_undo"):
 		get_tree().reload_current_scene()
+		
+	#print(Engine.get_frames_per_second())
 
 
 # =========================
@@ -185,6 +193,7 @@ func handle_attack(dir):
 		else:
 			animated_sprite.play("basic_attack_arial")
 		is_attacking = true
+		regen_cooldown.start()
 		attack()
 		await animated_sprite.animation_finished
 		is_attacking = false
@@ -299,6 +308,11 @@ func take_damage(damage, knockback = Vector2.ZERO):
 	
 	# --- SCREEN SHAKE ---
 	get_viewport().get_camera_2d().shake(2)
+	
+	# --- RESET REGEN COOLDOWN ---
+	regen_cooldown.start()
+	can_regen = false
+	#print(regen_cooldown.time_left)
 
 	print("Player Health: ", health)
 	hp_bar.value = health
@@ -306,3 +320,23 @@ func take_damage(damage, knockback = Vector2.ZERO):
 	if health <= 0:
 		print("Player Died")
 		get_tree().reload_current_scene()
+
+
+# =========================
+# HEALTH AND REGEN
+# =========================
+func _on_regen_cooldown_timeout() -> void:
+	can_regen = true
+
+func handle_health_and_regen(delta):
+	#print(can_regen)
+	
+	if not can_regen:
+		return
+		
+	if health >= GLOBAL.max_health:
+		return
+		
+	health += regen_rate * delta
+	health = min(health, GLOBAL.max_health)
+	hp_bar.value = health
