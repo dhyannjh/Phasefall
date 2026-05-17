@@ -19,10 +19,6 @@ boot_splash/bg_color=Color(1, 1, 1, 1)
 
 GLOBAL="*uid://da831bdy407d1"
 
-[display]
-
-window/size/mode=2
-
 [global_group]
 
 player=""

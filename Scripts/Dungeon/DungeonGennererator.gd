@@ -4,9 +4,12 @@ extends Node2D
 @export var room_spacing: Vector2 = Vector2(512, 512)
 
 # --- ROOMS ---
-@export var medium_rooms: Array[PackedScene]
 @export var easy_rooms: Array[PackedScene]
+@export var medium_rooms: Array[PackedScene]
 @export var hard_rooms: Array[PackedScene]
+@export var edge_rooms: Array[PackedScene]
+@export var top_edge_rooms: Array[PackedScene]
+@export var corners: Array[PackedScene]
 
 # --- PLAYER ---
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -46,17 +49,17 @@ func _physics_process(delta):
 func generate_grid():
 	grid.clear()
 
-	for y in range(grid_size.y):
+	for y in range(grid_size.y + 2):
 		var row = []
 		
-		for x in range(grid_size.x):
+		for x in range(grid_size.x + 2):
 			var room = RoomData.new()
 			room.grid_position = Vector2i(x, y)
 
 			# Difficulty based on position (IMPORTANT)
 			room.difficulty = x + y
 			
-			room.room_scene = get_random_room(room.difficulty)
+			room.room_scene = get_random_room(room.difficulty, x, y)
 			
 			row.append(room)
 		
@@ -64,12 +67,24 @@ func generate_grid():
 
 	print_grid_debug()
 
-func get_random_room(difficulty: int) -> PackedScene:
+func get_random_room(difficulty: int, x: int, y: int) -> PackedScene:
 
 	var room_pool: Array[PackedScene]
 
-	# Select difficulty pool
-	if difficulty < 2:
+	# --- CORNERS ---
+	if (x == 0 or x == grid_size.x + 1):
+		
+		if (y == 0 or y == grid_size.y + 1):
+			room_pool = corners
+		else:
+			room_pool = edge_rooms
+
+	# --- TOP/BOTTOM EDGES ---
+	elif (y == 0 or y == grid_size.y + 1):
+		room_pool = top_edge_rooms
+
+	# --- NORMAL ROOMS ---
+	elif difficulty < 2:
 		room_pool = easy_rooms
 
 	elif difficulty < 5:
@@ -78,14 +93,14 @@ func get_random_room(difficulty: int) -> PackedScene:
 	else:
 		room_pool = hard_rooms
 
-	# Filter duplicates
+	# --- FILTER DUPLICATES ---
 	var possible_rooms: Array[PackedScene] = []
 
 	for room in room_pool:
 		if allow_duplicates or room not in used_rooms:
 			possible_rooms.append(room)
 
-	# Fallback if exhausted
+	# --- FALLBACK ---
 	if possible_rooms.is_empty():
 
 		print("No unique rooms left in pool.")
@@ -96,10 +111,10 @@ func get_random_room(difficulty: int) -> PackedScene:
 			used_rooms.clear()
 			possible_rooms = room_pool
 
-	# Pick room
+	# --- PICK ROOM ---
 	var selected = possible_rooms.pick_random()
 
-	# Save used room
+	# --- SAVE USED ROOM ---
 	if not allow_duplicates:
 		used_rooms.append(selected)
 

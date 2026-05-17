@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dwgv3ajafmdcq"]
+
+[ext_resource type="Script" uid="uid://b070u5g5emkt3" path="res://Scripts/Dungeon/Scraps&Collectables/Scraps/scrap_collectables.gd" id="1_dsj1s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3ryr"]
+size = Vector2(8, 8)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_agnex"]
+
+[node name="ScrapCollectables" type="Area2D" unique_id=1565858492]
+script = ExtResource("1_dsj1s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=781564497]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_i3ryr")
+
+[node name="Temp" type="Sprite2D" parent="." unique_id=589141690]
+modulate = Color(0.47843137, 1, 0.30588236, 1)
+position = Vector2(4, -4)
+scale = Vector2(6.0000005, 6)
+texture = SubResource("CanvasTexture_agnex")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=613024719]

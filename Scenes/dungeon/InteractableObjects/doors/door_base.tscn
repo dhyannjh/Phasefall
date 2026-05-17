@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c7qlqejcnntq7"]
+
+[ext_resource type="Script" uid="uid://ubmbbmmnqnfb" path="res://Scripts/Dungeon/Door_scripts/door_script.gd" id="1_crcmr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhgfl"]
+size = Vector2(16, 48)
+
+[node name="door_base" type="Node2D" unique_id=769408343]
+script = ExtResource("1_crcmr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=291670293]
+position = Vector2(8, -24)
+shape = SubResource("RectangleShape2D_yhgfl")
+
+[node name="visuals" type="Node2D" parent="." unique_id=1984530840]

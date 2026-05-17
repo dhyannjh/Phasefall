@@ -27,6 +27,10 @@ extends CharacterBody2D
 @onready var damage_hitbox_dir: AnimationPlayer = $DamageHitbox/AnimationPlayer
 @onready var hitbox_shape: Sprite2D = $DamageHitbox/hitboxShape
 
+# --- DROPS ---
+@export var scrap_data: ScrapData
+@export var scrap_amount := 5
+
 # --- AI INPUTS ---
 var move_input := 0.0
 var jump_requested := false

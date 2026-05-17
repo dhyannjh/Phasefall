@@ -37,6 +37,7 @@ var base_velocity = Vector2.ZERO
 var knockback_vel = Vector2.ZERO
 
 var health = 100
+var scraps := 0
 
 var was_on_floor = false
 var is_now_on_floor = false
@@ -340,3 +341,13 @@ func handle_health_and_regen(delta):
 	health += regen_rate * delta
 	health = min(health, GLOBAL.max_health)
 	hp_bar.value = health
+
+
+# =========================
+# SCRAPS
+# =========================
+func add_scrap(amount):
+
+	scraps += amount
+
+	print("Scrap:", scraps)
